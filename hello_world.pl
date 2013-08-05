@@ -10,4 +10,8 @@ print "i have now added a row and so on";
 
 print "$ausgabe\n"; 
 
+my @array = qw(eins zwei drei vier);
+
+warn Dumper(@array);
+
 
