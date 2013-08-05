@@ -14,8 +14,8 @@ my @array = qw(eins zwei drei vier);
 
 warn Dumper(@array);
 
-my $hostname = "localhost";
+my $hostname2 = "localhost";
 
-warn $hostname;
+warn $hostname2;
 
 
