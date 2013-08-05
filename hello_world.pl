@@ -16,4 +16,6 @@ warn Dumper(@array);
 
 my $hostname = "localhost";
 
+warn $hostname;
+
 
