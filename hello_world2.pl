@@ -19,4 +19,6 @@ my $hostname1 = "localhost";
 
 warn $hostname1;
 
+warn "something else";
+
 
