@@ -11,17 +11,20 @@ my $memberList = {
     'marm' => new Model::TeamMember(
       'firstName' => 'Mario',
       'lastName'  => 'Romer',
-      'role'      => 'Software Developer'
+      'role'      => 'Software Developer',
+      'shortName' => 'marm'
     ),
     'hawu' => new Model::TeamMember(
       'firstName' => 'Hans',
       'lastName'  => 'Wurst',
-      'role'      => 'Test Engineer'
+      'role'      => 'Test Engineer',
+      'shortName' => 'hawu'
     ),
     'pekl' => new Model::TeamMember(
       'firstName' => 'Peter',
       'lastName'  => 'Klein',
-      'role'      => 'Scrum Master'
+      'role'      => 'Scrum Master',
+      'shortName' => 'pekl'
     )
   }; 
 
@@ -34,3 +37,28 @@ subtest 'create new Instance' => sub {
   is($team->get_teamName(),          'AwsumTeam', 'got correct teamName');
   is_deeply($team->get_memberList(), $memberList, 'got correct memberList');
 };
+
+subtest 'add a new teamMember' => sub {
+  
+  subtest 'add wrong teamMember' => sub {
+    ok(!$team->add_member("abc"), 'can not add  teamMember in wrng format'); 
+    is($team->get_memberList()->{'abc'}, undef, 'no entry for abc exist'); 
+  };
+  
+  subtest 'add correct teamMember' => sub {
+    my $new_member = new Model::TeamMember(
+      'firstName' => 'Franz',
+      'lastName'  => 'Dietrich',
+      'role'      => 'Software Developer',
+      'shortName' => 'frdi'
+    );
+    
+    ok($team->add_member($new_member));
+    
+    is($team->get_memberList()->{'frdi'}, $new_member, 'got correct teamMember');
+    
+  };
+};
+
+
+

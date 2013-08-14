@@ -21,4 +21,22 @@ has 'memberList' => (
   'default' => undef
 );
 
+
+sub add_member {
+  my $self = shift;
+  my $member = shift;
+
+  if(ref $member ne 'Model::TeamMember' || defined $self->get_memberList->{$member->get_shortName()}) {
+    warn "can not add teamMember";
+    return 0;
+  } else {
+    $self->get_memberList->{$member->get_shortName()} = $member;
+    return 1;
+  }
+  
+  return 0;
+}
+
+
+
 1;
