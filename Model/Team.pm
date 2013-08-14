@@ -1,4 +1,4 @@
-package Model::Teams;
+package Model::Team;
 
 use strict;
 use warnings;
