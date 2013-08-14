@@ -3,7 +3,7 @@ use warnings;
 use Test::More qw/no_plan/;
 use Data::Dumper;
 use lib '../';
-use Model::Teams;
+use Model::Team;
 use Model::TeamMember;
 
 my $team;
@@ -29,7 +29,7 @@ my $memberList = {
   }; 
 
 subtest 'create new Instance' => sub {
-  $team = new Model::Teams(
+  $team = new Model::Team(
     'teamName' => 'AwsumTeam',
     'memberList' => $memberList
   );
