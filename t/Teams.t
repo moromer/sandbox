@@ -60,5 +60,20 @@ subtest 'add a new teamMember' => sub {
   };
 };
 
+subtest 'delete a member' => sub {
+  
+  subtest 'delete non existing member' => sub {
+    ok (!$team->remove_member('klm'), 'can not delete non existing member');
+    is_deeply($team->get_memberList(), $memberList, 'got correct memberList');
+      
+  };
+  
+  subtest 'delete existing member' => sub {
+    ok ($team->remove_member('frdi'), 'can delete existing member');
+    is($team->get_memberList()->{'frdi'}, undef, 'frdi does not exist anymore');
+  };
+  
+};
+
 
 

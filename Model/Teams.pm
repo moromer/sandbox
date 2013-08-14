@@ -23,7 +23,7 @@ has 'memberList' => (
 
 
 sub add_member {
-  my $self = shift;
+  my $self   = shift;
   my $member = shift;
 
   if(ref $member ne 'Model::TeamMember' || defined $self->get_memberList->{$member->get_shortName()}) {
@@ -37,6 +37,19 @@ sub add_member {
   return 0;
 }
 
-
+sub remove_member {
+  my $self      = shift;
+  my $shortName = shift;
+  
+  if(defined $self->get_memberList->{$shortName}) {
+    delete($self->get_memberList->{$shortName});
+    return 1;
+  } else {
+    warn "no entry exist for shortName $shortName";
+    return 0;
+  }
+  
+  return 0;
+}
 
 1;
