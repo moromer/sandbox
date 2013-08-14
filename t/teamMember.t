@@ -22,6 +22,6 @@ subtest 'create new Instance' => sub {
 subtest 'change role' => sub {
   $teamMember->set_role("System Analyst Development");
   
-  is($teamMember->get_role(),      'System Analyst Development', 'get correct role');
+  is($teamMember->get_role(),      'System Analyst Developmesnt', 'get correct role');
   
 };
