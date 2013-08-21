@@ -31,7 +31,7 @@ subtest 'change the task' => sub {
   
   subtest 'change size' => sub {
     $task->set_description("this is a NEW description template");
-    is($task->get_description(), "this is a NEW description template", "get correct description");
+    is($task->get_description(), "this is a NEW BUG description template", "get correct description");
   };
   
 };
