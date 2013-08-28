@@ -47,6 +47,9 @@ while($action ne '6') {
     case 5 {
       add_task();
     }
+    case 5 {
+      show_tasks();
+    }
   }
   
   
@@ -68,6 +71,22 @@ sub show_team {
     }
   } else {
     print "no member exist yet\n";
+  }
+  
+  print "\n\n\n";
+  
+  if(defined $team->get_taskList() && keys %{$team->get_taskList()} > 0) {
+    
+    my $taskList = $team->get_taskList();
+    print "Tasks:\n";
+    foreach my $key (keys (%$taskList) ) {
+      printf("Description: %s \n Size: %s\n", 
+              $taskList->{$key}->get_description(), 
+              $taskList->{$key}->get_size()
+      );
+    }
+  } else {
+    print "no Tasks exist yet\n";
   }
   
   
