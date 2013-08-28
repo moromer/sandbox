@@ -5,11 +5,13 @@ use warnings;
 
 use lib ".";
 use Model::TeamMember;
+use Model::Task;
 use Model::Team;
 use Data::Dumper;
 use Switch;
 
 my $team;
+my $BLI = 0001;
 
 printf("%10s", "=================\n");
 printf("%10s", "| Team Overview |\n");
@@ -20,10 +22,11 @@ print "1. show team\n";
 print "2. create team\n";
 print "3. remove teamMember\n";
 print "4. add teamMember\n";
-print "5. exit\n";
+print "5. add Task\n";
+print "6. exit\n";
 
 my $action = '';
-while($action ne '5') {
+while($action ne '6') {
   print "what to do?\n";
   $action = <STDIN>; 
   $action =~ s/\n//g;
@@ -40,6 +43,9 @@ while($action ne '5') {
     }
     case 4 {
       add_teamMember();
+    }
+    case 5 {
+      add_task();
     }
   }
   
@@ -114,6 +120,27 @@ sub add_teamMember {
   );
   
   $team->add_member($member);
+}
+
+
+sub add_task {
+  print "Description:\n";
+  my $description = <STDIN>;
+  $description =~ s/\n//g;
+  
+  print "Size:\n";
+  my $size = <STDIN>;
+  $size =~ s/\n//g;
+  
+  my $task = new Model::Task(
+    'BLI'         => "BLI_$BLI",
+    'description' => $description,
+    'size'        => $size
+  );
+  
+  $team->add_task($task);
+  $BLI++;
+  
 }
 
 
