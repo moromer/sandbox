@@ -21,6 +21,15 @@ has 'memberList' => (
   'default' => undef
 );
 
+has 'taskList' => (
+  'is' => 'ro',
+  'reader' => 'get_taskList',
+  'writer' => undef,
+  'default' => sub {
+    return {}
+  }
+);
+
 
 sub add_member {
   my $self   = shift;
@@ -50,6 +59,19 @@ sub remove_member {
   }
   
   return 0;
+}
+
+sub add_task {
+  my $self = shift;
+  my $task = shift;
+  
+  if(ref $task ne 'Model::Task' || defined $self->get_taskList->{$task->get_BLI()}) {
+    warn "Task already added";
+    return 0;
+  } else {
+    $self->get_taskList->{$task->get_BLI()} = $task;
+    return 1;
+  }
 }
 
 1;

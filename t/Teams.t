@@ -5,6 +5,7 @@ use Data::Dumper;
 use lib '../';
 use Model::Team;
 use Model::TeamMember;
+use Model::Task;
 
 my $team;
 my $memberList = {
@@ -73,6 +74,33 @@ subtest 'delete a member' => sub {
     is($team->get_memberList()->{'frdi'}, undef, 'frdi does not exist anymore');
   };
   
+};
+
+subtest "add a new Task" => sub {
+   subtest 'add non existing Task' => sub {
+     my $task = new Model::Task(
+        'BLI'         => "BLI_001",
+        'description' => "testTask",
+        'size'        => 10
+      );
+      
+      ok($team->add_task($task), "add a new task");
+      
+      $task->{'BLI'} = "BLI_002";  
+      
+      ok($team->add_task($task), "add a new task"); 
+      
+   };
+   
+   subtest 'add a existing Task' => sub {
+      ok(!$team->add_task(new Model::Task(
+        'BLI'         => "BLI_001",
+        'description' => "testTask",
+        'size'        => 10
+      )), "can not add already existing task"); 
+      
+      is(keys(%{$team->get_taskList()}), '2', 'only one entry in TaskList exist'); 
+   };
 };
 
 
